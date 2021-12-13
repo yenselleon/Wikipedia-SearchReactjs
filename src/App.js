@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+  Analitycs
 
-function App() {
+  Ranking de paises y visitas totales a la pagina wikipedia 
+  Link: 
+  https://wikimedia.org/api/rest_v1/metrics/pageviews/top-by-country/all-projects/all-access/2020/11
+
+  ranking de articulos por lenguas
+  https://wikimedia.org/api/rest_v1/metrics/pageviews/top/es.wikisource/all-access/2020/10/all-days
+
+  eventos del dia muertes y sucesos importantes
+  https://byabbe.se/on-this-day/#/default/get__month___day__events_json
+  
+*/
+
+import './App.css';
+import {Provider} from 'react-redux'
+import { store } from './store/store';
+import AppRouter from './routes/AppRouter';
+
+
+const App = ()=>  {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <AppRouter/>
+    </Provider>
   );
 }
 
