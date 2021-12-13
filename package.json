@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-   "homepage": "https://yenselleon.github.io/",
+   "homepage": "https://yenselleon.github.io/Wikipedia-SearchReactjs",
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
