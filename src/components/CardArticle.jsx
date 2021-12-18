@@ -65,10 +65,19 @@ const CardArticle = ({data}) => {
                 height="194"
                 image={data?.imageSource ? data.imageSource : not_image}
                 alt="Paella dish"
+                sx={{
+                    objectFit: "cover",
+                    objectPosition: "top"
+                }}
             />
             <CardContent>
-                <Typography variant="h7" color="Highlight" 
-                    
+                <Typography 
+                    variant="h7" 
+                    color="Highlight" 
+                    sx={{
+                        fontFamily: 'var(--poppins)',
+                        fontWeight: '500'
+                    }}
                 >
                     {data.title}
                 </Typography>
@@ -76,7 +85,9 @@ const CardArticle = ({data}) => {
                     variant="body2" 
                     color="text.secondary"
                     sx={{ 
-                        marginTop:"10px"
+                        marginTop:"10px",
+                        fontFamily: 'var(--poppins)',
+                        fontWeight: '500'
                     }} 
                 >
                     {data.description}
@@ -98,7 +109,7 @@ const CardArticle = ({data}) => {
                        (bookmarks.find(article=> (
                            article.pageId === data.pageId
                        )) ) ?
-                            <BookmarkIcon />
+                            <BookmarkIcon sx={{color: '#FF9100'}}/>
                        :
                             <BookmarkBorderIcon/>
                     }

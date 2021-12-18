@@ -20,7 +20,8 @@ const CardCategory = ({data}) => {
         sx={{
             width: '260px',
             cursor: 'pointer',
-            height: '240px'
+            height: '240px',
+            
         }}
         onClick={handleNavigateToCategoryScreen}
     >
@@ -30,8 +31,22 @@ const CardCategory = ({data}) => {
         image={data.imageCategory}
         alt=""
       />
-      <CardContent>
-        <Typography gutterBottom variant="h7" component="div">
+      <CardContent
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '10px'
+        }}
+      >
+        <Typography 
+          gutterBottom 
+          component="div"
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'var(--poppins)',
+          }}
+        >
           {data.category}
         </Typography>
       </CardContent>

@@ -1,4 +1,4 @@
-import { Container, Stack } from '@mui/material';
+import { Box, Card, Container, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import notImage from '../images/not_image.jpg';
@@ -8,12 +8,11 @@ import "rc-pagination/assets/index.css";
 
 import Slider from "react-slick";
 import CardArticle from '../components/CardArticle';
-
+import SearchInput from '../components/SearchInput';
 
 const BookmarksScreen = () => {
     
     const {bookmarks} = useSelector(state => state.localStoragedata)
-    const dispatch = useDispatch()
 
     /* pagination parameters */
     const [pageNumber, setPageNumber] = useState(1);
@@ -29,7 +28,7 @@ const BookmarksScreen = () => {
       };
     
     /* pagination parameters */
-    console.log({lastPagesVisited, newPagesVisited, displayItems})
+
 
     const settings = {
         dots: true,
@@ -49,28 +48,105 @@ const BookmarksScreen = () => {
                 background: '#EAEEF3'
             }}
         >
-            <Stack
+
+            {/* Header section */}
+            <Box 
+                px="3px" 
+                py="5px" 
+                display="flex" 
                 justifyContent="center"
-                direction="row"
-                marginBottom="30px"
+                alignItems="start"
+                sx={{
+                    background: '#20232B',
+                    height: '330px',
+                    width: '100%',
+                    marginBottom: '100px',
+                    position: 'relative'
+                }}
             >
-                {
-                    bookmarks.length > 0
-                    ?
-                        <Slider {...settings} className="carouselWrapper">
-                            {
-                                displayItems.map(( articles, i) => (
-                                    articles.hasOwnProperty('imageSource') &&
-                                        <img src={ articles.imageSource} alt="imagePost" key={i} className="imageCarousel"/>
-                                ))
-                            }
-                        </Slider>
-                    : <h1>Cargando</h1>
-                }
-               
+                <Box
+                    sx={{
+                        marginTop: '20px'
+                    }}
+                >
+                    <SearchInput/>
+                    <Typography 
+                        gutterBottom 
+                        
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: '#FF9100',
+                            marginTop: '10px',
+                            fontFamily: 'var(--barlow)',
+                            fontSize: {sx: '1.2rem', md: '1.3rem'}
+                        }}
+                    >
+                        Search everything you want on Wikipedia
+                    </Typography>
+                    <Typography 
+                        gutterBottom 
+                        variant="overline" 
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: 'white',
+                            marginTop: '5px',
+                            fontFamily: 'var(--poppins)',
+                            fontW: '400'
+                        }}
+                    >
+                        Designed By Yensel Leon
+                    </Typography>
+                </Box>
 
-            </Stack>
+                {/* Slider Images */}
+                <Card
+                    raised={true}
+                    direction="row"
+                    sx={{
+                        position: 'absolute',
+                        bottom: '-80px',
+                        zIndex: '9',
+                        width: {xs: '250px' , md: '450px'},
+                        height: '250px',
+                        borderRadius: '10px',
+                        background: '#FFFF',
+                        display: 'flex',
+                        justifyContent: "center"
+                    }}
+                >
+                    {
+                        bookmarks.length > 0
+                        ?
+                            <Slider {...settings} className="carouselWrapper">
+                                {
+                                    displayItems.map(( articles, i) => (
+                                        articles.hasOwnProperty('imageSource') &&
+                                            <img src={ articles.imageSource} alt="imagePost" key={i} className="imageCarousel"/>
+                                    ))
+                                }
+                            </Slider>
+                        : <h1>Cargando</h1>
+                    }
+                
 
+                </Card>
+            </Box>
+            
+
+            <Typography 
+                gutterBottom 
+                component="div"
+                sx={{
+                    textAlign: 'center',
+                    marginTop: '10px',
+                    fontFamily: 'var(--barlow)',
+                    fontSize: {sx: '1.2rem', md: '1.3rem'}
+                }}
+            >
+                Bookmarks
+            </Typography>
 
             {/* seccion de articulos */}
             <Stack

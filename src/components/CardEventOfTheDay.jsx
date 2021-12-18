@@ -22,7 +22,15 @@ const CardEventOfTheDay = ({data}) => {
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h7" component="div" textAlign="center" fontWeight="bold">
+        <Typography 
+          gutterBottom  
+          component="div" 
+          textAlign="center" 
+          sx={{
+            fontFamily: 'var(--poppins)',
+            fontWeight: '500'
+          }}
+        >
           Year: {data.year}
         </Typography>
         <Typography 
@@ -30,7 +38,14 @@ const CardEventOfTheDay = ({data}) => {
             variant="caption" 
             component="div" 
             textAlign="justify"
-            sx={{width: "100%", height: "80px", overflow: "hidden"}}>
+            sx={{
+              width: "100%", 
+              height: "80px", 
+              overflow: "hidden",
+              fontFamily: 'var(--poppins)',
+              fontWeight: '400'
+            }}
+          >
           {data.description}
         </Typography>
       </CardContent>

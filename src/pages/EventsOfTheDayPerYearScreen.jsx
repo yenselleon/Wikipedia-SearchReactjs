@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startGetDataEventOfTheDay } from '../actions/ui';
 import { useParams } from 'react-router-dom';
 
-import { Stack } from '@mui/material';
+import { Box, Card, Skeleton, Stack, Typography } from '@mui/material';
 import notImage from '../images/not_image.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
-
+import SearchInput from '../components/SearchInput';
 
 
 const EventsOfTheDayPerYearScreen = () => {
@@ -68,28 +68,111 @@ const EventsOfTheDayPerYearScreen = () => {
                 background: '#EAEEF3'
             }}
         >
-            <Stack
+
+            {/* header Section */}
+            <Box 
+                px="3px" 
+                py="5px" 
+                display="flex" 
                 justifyContent="center"
-                direction="row"
-                marginBottom="30px"
+                alignItems="start"
+                sx={{
+                    background: '#20232B',
+                    height: '330px',
+                    width: '100%',
+                    marginBottom: '100px',
+                    position: 'relative'
+                }}
             >
-                {
-                    articles.length > 0
-                    ?
-                        <Slider {...settings} className="carouselWrapper">
-                            {
-                                articles.map(( articles, i) => (
-                                    articles.hasOwnProperty('pageId') &&
-                                        <img src={ articles?.imageSource ? articles.imageSource : notImage} alt="not_image" key={i} className="imageCarousel"/>
-                                ))
-                            
-                            }
-                        </Slider>
-                    : <h1>Cargando</h1>
-                }
+                <Box
+                    sx={{
+                        marginTop: '20px'
+                    }}
+                >
+                    <SearchInput/>
+                    <Typography 
+                        gutterBottom 
+                        
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: '#FF9100',
+                            marginTop: '10px',
+                            fontFamily: 'var(--barlow)',
+                            fontSize: {sx: '1.2rem', md: '1.3rem'}
+                        }}
+                    >
+                        Search everything you want on Wikipedia
+                    </Typography>
+                    <Typography 
+                        gutterBottom 
+                        variant="overline" 
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: 'white',
+                            marginTop: '5px',
+                            fontFamily: 'var(--poppins)',
+                            fontW: '400'
+                        }}
+                    >
+                        Designed By Yensel Leon
+                    </Typography>
+                </Box>
 
-            </Stack>
+                {/* Slider Images */}
+                <Card
+                    raised={true}
+                    direction="row"
+                    sx={{
+                        position: 'absolute',
+                        bottom: '-80px',
+                        zIndex: '9',
+                        width: {xs: '250px' , md: '450px'},
+                        height: '250px',
+                        borderRadius: '10px',
+                        background: '#FFFF',
+                        display: 'flex',
+                        justifyContent: "center"
+                    }}
+                >
+                    {
+                        articles.length > 0
+                        ?
+                            <Slider {...settings} className="carouselWrapper">
+                                {
+                                    articles.map(( articles, i) => (
+                                        articles.hasOwnProperty('pageId') &&
+                                            <img src={ articles?.imageSource ? articles.imageSource : notImage} alt="not_image" key={i} className="imageCarousel"/>
+                                    ))
+                                
+                                }
+                            </Slider>
+                        : 
+                            <Skeleton  
+                                variant="rectangular" 
+                                sx={{
+                                    width: '100%',
+                                    height: '250px'
+                                }} 
+                            />
+                    }
 
+                </Card>
+            </Box>
+
+            <Typography 
+                gutterBottom 
+                component="div"
+                sx={{
+                    textAlign: 'center',
+                    marginTop: '10px',
+                    fontFamily: 'var(--barlow)',
+                    fontSize: {sx: '1.2rem', md: '1.3rem'}
+                }}
+            >
+                Relevants Events Of The Year: {year}
+            </Typography>
 
             {/* seccion de articulos */}
             <Stack
@@ -110,7 +193,13 @@ const EventsOfTheDayPerYearScreen = () => {
                             
                         ))
                     :
-                        <h1>notData</h1>
+                        <Skeleton  
+                            variant="rectangular" 
+                            sx={{
+                                width: '100%',
+                                height: '350px'
+                            }} 
+                        />
                 }
             </Stack>
         </Container>

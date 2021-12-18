@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react'
 import CardDayArticle from '../components/CardDayArticle'
 import Container from '@mui/material/Container';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Skeleton, Typography } from '@mui/material';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Box } from '@mui/system';
+import { Box, height } from '@mui/system';
 import { responsiveCarouselHomeScreen } from '../helpers/carouselHelpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { startGetDataEventOfTheDay, startGetDataMostPopularArticleOfMonth } from '../actions/ui';
 import CardMostPopularArticle from '../components/CardMostPopularArticle';
 import CardEventOfTheDay from '../components/CardEventOfTheDay';
+import Divider from '@mui/material/Divider';
 
 import {jsonDataCategory} from '../helpers/categoriesJSON/categorys'
 import CardCategory from '../components/CardCategory';
 import CardArticle from '../components/CardArticle';
+import SearchInput from '../components/SearchInput';
+
+import svgLogoWikipedia from '../images/wikipediaLogo.svg'
 
 
 const HomeScreen = () => {
@@ -39,13 +43,75 @@ const HomeScreen = () => {
         <Container
             sx={{
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
-                marginTop: '10px'
+                marginTop: '10px',
+                
             }}
         >
+            {/* Header Section */}
+
+            <Box 
+                px="3px" 
+                py="5px" 
+                display="flex" 
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                    background: '#3F51B5',
+                    height: '300px',
+                    width: '100%',
+                    marginBottom: '20px'
+                }}
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <img src={svgLogoWikipedia} alt="wikipedia logo"/>
+                    <SearchInput/>
+                    <Typography 
+                        gutterBottom 
+                        
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: '#FF9100',
+                            marginTop: '10px',
+                            fontFamily: 'var(--barlow)',
+                            fontSize: {sx: '1.2rem', md: '1.3rem'}
+                        }}
+                    >
+                        Search everything you want on Wikipedia
+                    </Typography>
+                    <Typography 
+                        gutterBottom 
+                        variant="overline" 
+                        component="div"
+                        sx={{
+                            textAlign: 'center',
+                            color: 'white',
+                            marginTop: '5px',
+                            fontFamily: 'var(--poppins)',
+                            fontW: '400'
+                        }}
+                    >
+                        Designed By Yensel Leon
+                    </Typography>
+                </Box>
+            </Box>
+
+            {/* Content Section */}
             <Typography 
                 gutterBottom 
-                variant="h5" 
+                
                 component="div"
+                sx={{
+                    fontFamily: 'var(--barlow)',
+                    fontSize: '1.2rem'
+                }}
             >
                 Most Popular Articles
             </Typography>
@@ -56,21 +122,44 @@ const HomeScreen = () => {
                 removeArrowOnDeviceType={["tablet", "mobile"]}
                 infinite={true}
                 centerMode={true}
+                containerClass="container_carousel_wrapper"
             >
                 {
                     mostPopularArticlesMonth.length > 0 
                     ?
-                        mostPopularArticlesMonth.map((data, i) => (
+                       ( mostPopularArticlesMonth.map((data, i) => (
                             <Box px="3px" py="5px" display="flex" justifyContent="center" key={data.pageId}>
                                 <CardMostPopularArticle  data={data}/>
                             </Box>
-                        ))
-                    :   <h1>Cargando</h1>
+                        )))
+                    :   (
+                        <Skeleton  
+                            variant="rectangular" 
+                            sx={{
+                                width: '1500px',
+                                height: '150px'
+                            }} 
+                        />
+                    )
                 }
             </Carousel>
 
+            <Divider
+                sx={{
+                    margin: '20px 0px'
+                }}
+            />
+
             {/*Carousel categorias */}
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography 
+                gutterBottom 
+                
+                component="div"
+                sx={{
+                    fontFamily: 'var(--barlow)',
+                    fontSize: '1.2rem'
+                }}
+            >
                 Categories
             </Typography>
             <Carousel
@@ -96,12 +185,22 @@ const HomeScreen = () => {
                 }
             </Carousel>
 
+            <Divider
+                sx={{
+                    margin: '20px 0px'
+                }}
+            />
+
             <Typography 
                 gutterBottom 
-                variant="h5" 
+                
                 component="div"
+                sx={{
+                    fontFamily: 'var(--barlow)',
+                    fontSize: '1.2rem'
+                }}
             >
-                Events of the day per year
+                Most Relevants Events of the day by year
             </Typography>
             <Carousel
                 responsive={responsiveCarouselHomeScreen}
@@ -117,17 +216,33 @@ const HomeScreen = () => {
                                 <CardEventOfTheDay  data={data}/>
                             </Box>
                         ))
-                    :   <h1>Cargando</h1>
+                    :   <Skeleton  
+                            variant="rectangular" 
+                            sx={{
+                                width: '1500px',
+                                height: '150px'
+                            }} 
+                        />
                 }
             </Carousel>
+
+            <Divider
+                sx={{
+                    margin: '20px 0px'
+                }}
+            />
 
             {/*Carousel ultimos vistos */}
             <Typography 
                 gutterBottom 
-                variant="h5" 
+                
                 component="div"
+                sx={{
+                    fontFamily: 'var(--barlow)',
+                    fontSize: '1.2rem'
+                }}
             >
-                last seen
+                Last Seen
             </Typography>
             <Carousel
                 responsive={responsiveCarouselHomeScreen}
@@ -135,14 +250,38 @@ const HomeScreen = () => {
                 
             >
                 {
-                    lastview.length > 0 ?
+                    lastview.length > 0 &&
                         lastview.map(articleData=> (
                             <CardArticle data={articleData} key={articleData.pageId}/>
                         ))
-                    :
-                        <h1>No data...</h1>
                 }
             </Carousel>
+                {
+                    lastview.length === 0 &&
+                        <Box
+                            sx={{
+                                width: '100%',
+                                height: '200px',
+                                background: '#EAEEF3',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <Typography 
+                                gutterBottom 
+                                
+                                component="div"
+                                sx={{
+                                    fontFamily: 'var(--barlow)',
+                                    fontSize: '1.2rem'
+                                }}
+                            >
+                                You have not seen any article yet
+                            </Typography>
+                        </Box>
+                        
+                }
 
 
         </Container>

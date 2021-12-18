@@ -3,14 +3,12 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
-import Paper from '@mui/material/Paper';
-import { useNavigate } from 'react-router-dom';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material';
+
+
+import { useNavigate, useLocation } from 'react-router-dom';
+import { List, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material';
 
 import HomeIcon from '@mui/icons-material/Home';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -18,23 +16,12 @@ import Divider from '@mui/material/Divider';
 
 const Navbar = () => {
 
-    const [inputSearch, setInputSearch] = useState('');
+    const {pathname} = useLocation()
+
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+
     
-
-    const handleOnChangeInput = (e)=> {
-        e.preventDefault();
-
-        setInputSearch({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleInputSubmit = (e)=> {
-        e.preventDefault();
-        navigate(`/search/${inputSearch.inputSearch}`)
-    }
+    const navigate = useNavigate();
 
     const toggleDrawer = (boolean)=> {
         setIsOpen(boolean)
@@ -42,6 +29,7 @@ const Navbar = () => {
 
     const handleNavigateTo = (page)=> {
         navigate(page === 'home' ? `/` : `/bookmarks`)
+        setIsOpen(false);
     }
 
     return (
@@ -53,6 +41,9 @@ const Navbar = () => {
                 open={isOpen}
                 onClose={()=> toggleDrawer(false)}
                 onOpen={()=> toggleDrawer(true)}
+                sx={{
+                    zIndex: '99999'
+                }}
             >
                 <Box
                     sx={{
@@ -61,17 +52,22 @@ const Navbar = () => {
                 >
                     <List>
                         <ListItemButton
-                            /* sx={{
-                                '&:hover':{
-                                    opacity: [0.9, 0.8, 0.7],
-                                    cursor: 'pointer'
-                                }
-                            }} */
+                            sx={{
+                                backgroundColor: ()=> (
+                                    (pathname === '/')
+                                        ?
+                                            'rgba(0, 0, 0, 0.04)'
+                                        :
+                                            'none'
+                                )
+                            }}
                             onClick={()=> handleNavigateTo('home')}
                         >
                             <ListItemIcon 
                             >
-                                <HomeIcon/>
+                                <HomeIcon
+                                    sx={{color: '#FF9100'}}
+                                />
                             </ListItemIcon >
                             <ListItemText>
                                 Home
@@ -81,17 +77,23 @@ const Navbar = () => {
                         <Divider/>
 
                         <ListItemButton
-                            /* sx={{
-                                '&:hover':{
-                                    opacity: [0.9, 0.8, 0.7],
-                                    cursor: 'pointer'
-                                }
-                            }} */
+                            
+                            sx={{
+                                backgroundColor: ()=> (
+                                    (pathname === '/bookmarks')
+                                        ?
+                                            'rgba(0, 0, 0, 0.04)'
+                                        :
+                                            'none'
+                                )
+                            }}
                             onClick={()=> handleNavigateTo('bookmarks')}
                         >
                             <ListItemIcon 
                             >
-                                <BookmarkIcon/>
+                                <BookmarkIcon
+                                    sx={{color: '#FF9100'}}
+                                />
                             </ListItemIcon >
                             <ListItemText>
                                 Bookmarks
@@ -102,39 +104,37 @@ const Navbar = () => {
             </SwipeableDrawer>
 
             {/* navbar section */}
-            <AppBar position="static" >
-                <Toolbar>
+            <AppBar 
+                position="fixed"
+                sx={{
+                    background: 'white',
+                    zIndex: '9999'
+                }}
+            >
+                <Toolbar sx={{display: 'flex'}}>
                 <IconButton
                     size="large"
                     edge="start"
-                    color="inherit"
+                    
                     aria-label="menu"
-                    sx={{ mr: 2 }}
+                    sx={{ mr: 2, color: '#FF9100'}}
                     onClick={()=> toggleDrawer(true)}
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" component="div" >
+                
+                <Typography 
+                    variant="h6" 
+                    component="div"
+                    color="GrayText"
+                    textAlign="center"
+                    margin='auto'
+                >
                     Wikipedia
                 </Typography>
-                <Paper
-                    component="form"
-                    onSubmit={handleInputSubmit}
-                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, margin: 'auto'}}
-                >
-                    <InputBase
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder="Search in Wikipedia"
-                        inputProps={{ 'aria-label': 'Search in Wikipedia' }}
-                        name="inputSearch"
-                        onChange={handleOnChangeInput}
-                    />
-                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-                <Button color="inherit">Login</Button>
                 </Toolbar>
+                
+                
             </AppBar>
       </Box>
     )

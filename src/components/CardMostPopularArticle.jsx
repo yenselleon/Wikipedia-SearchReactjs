@@ -49,8 +49,9 @@ const CardMostPopularArticle = ({data}) => {
     <Card 
       sx={
         { width: '270px', 
-          height: '300px',
-          cursor: 'pointer'
+          height: '305px',
+          cursor: 'pointer',
+          paddingBottom: '5px',
         }
       }
       onClick={handleNavigateToWikipidia}
@@ -65,8 +66,21 @@ const CardMostPopularArticle = ({data}) => {
           objectPosition: "top"
         }}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h7" component="div">
+      <CardContent
+        sx={{
+          height: '30px',
+          overflow: 'hidden',
+
+        }}
+      >
+        <Typography 
+          gutterBottom 
+         
+          sx={{
+            fontFamily: 'var(--poppins)',
+            fontWeight: '500'
+          }}
+        >
           {data.title}
         </Typography>
       </CardContent>
@@ -86,9 +100,9 @@ const CardMostPopularArticle = ({data}) => {
                        (bookmarks.find(article=> (
                            article.pageId === data.pageId
                        )) ) ?
-                            <BookmarkIcon />
+                            <BookmarkIcon sx={{color: '#FF9100'}}/>
                        :
-                            <BookmarkBorderIcon/>
+                            <BookmarkBorderIcon />
                     }
                 </IconButton>
             </CardActions>
