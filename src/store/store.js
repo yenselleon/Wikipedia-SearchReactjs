@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { uiReducer } from '../reducers/uiReducer';
+import { getDataReducer } from '../reducers/getDataReducer';
 import persidState from 'redux-localstorage'
 import { setLocalStorageReducer } from '../reducers/setLocalStorageReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
-    ui: uiReducer,
+    getData: getDataReducer,
     localStoragedata: setLocalStorageReducer,
 });
 

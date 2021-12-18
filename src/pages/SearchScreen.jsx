@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Container from '@mui/material/Container';
 
 import CardArticle from '../components/CardArticle';
 import { useDispatch, useSelector } from 'react-redux';
-import { startSearchInputParams } from '../actions/ui';
+import { startSearchInputParams } from '../actions/getData';
 import { useParams } from 'react-router-dom'
 import { Box } from '@mui/system';
 import { Card, Skeleton, Stack, Typography } from '@mui/material';
@@ -40,6 +40,7 @@ const SearchScreen = () => {
     useEffect(() => {
         getDataFromInputSearh()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchInput])
 
     /* useEffect(() => {

@@ -4,7 +4,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import App from '../App';
 import Navbar from '../components/Navbar';
 import NotFoundPageScreen from '../pages/404Screen';
 import BookmarksScreen from '../pages/BookmarksScreen';

@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import React from 'react';
 import not_image from '../images/not_image.jpg';
 import {useNavigate} from 'react-router-dom'

@@ -1,7 +1,6 @@
 import { Box, Card, Container, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import notImage from '../images/not_image.jpg';
+import { useSelector } from 'react-redux';
 
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";

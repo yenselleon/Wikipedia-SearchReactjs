@@ -8,7 +8,7 @@ const initialState = {
     searchedResults: [],
 }
 
-export const uiReducer = (state = initialState, action)=> {
+export const getDataReducer = (state = initialState, action)=> {
     const {payload} = action;
 
     switch (action.type) {

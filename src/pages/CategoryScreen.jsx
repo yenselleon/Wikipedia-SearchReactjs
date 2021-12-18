@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Container from '@mui/material/Container';
 import CardArticle from '../components/CardArticle'
 import { useDispatch, useSelector } from 'react-redux';
-import { startGetDataEventOfTheDay } from '../actions/ui';
 import { useParams } from 'react-router-dom'
 import { Box } from '@mui/system';
 import { Card, Stack, Typography } from '@mui/material';
@@ -10,7 +9,7 @@ import notImage from '../images/not_image.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {jsonDataCategory} from '../helpers/categoriesJSON/categorys'
-import { getDatacategory } from '../actions/ui'
+import { getDatacategory } from '../actions/getData'
 import SearchInput from '../components/SearchInput';
 
 import Slider from "react-slick";
@@ -42,6 +41,7 @@ const CategoryScreen = () => {
     useEffect(() => {
         getCategorys()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

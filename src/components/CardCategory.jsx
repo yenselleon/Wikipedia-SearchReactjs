@@ -1,14 +1,11 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import React, {  } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getDatacategory } from '../actions/ui'
 
 const CardCategory = ({data}) => {
 
     const navigate = useNavigate();
     
-    const dispatch = useDispatch();
 
     const handleNavigateToCategoryScreen =()=> {
         navigate(`/category/${data.category}`);

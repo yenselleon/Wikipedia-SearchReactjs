@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Container from '@mui/material/Container';
 import CardArticle from '../components/CardArticle'
 import { useDispatch, useSelector } from 'react-redux';
-import { startGetDataEventOfTheDay } from '../actions/ui';
+import { startGetDataEventOfTheDay } from '../actions/getData';
 import { useParams } from 'react-router-dom';
 
 import { Box, Card, Skeleton, Stack, Typography } from '@mui/material';
@@ -40,12 +40,14 @@ const EventsOfTheDayPerYearScreen = () => {
 
     useEffect(() => {
         getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         if(eventOfTheDayPerYear.length > 0){
             filterData()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [eventOfTheDayPerYear])
 
 

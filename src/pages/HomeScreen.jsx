@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
-import CardDayArticle from '../components/CardDayArticle'
 import Container from '@mui/material/Container';
-import { Grid, Skeleton, Typography } from '@mui/material';
+import {  Skeleton, Typography } from '@mui/material';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Box, height } from '@mui/system';
+import { Box } from '@mui/system';
 import { responsiveCarouselHomeScreen } from '../helpers/carouselHelpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { startGetDataEventOfTheDay, startGetDataMostPopularArticleOfMonth } from '../actions/ui';
+import { startGetDataEventOfTheDay, startGetDataMostPopularArticleOfMonth } from '../actions/getData';
 import CardMostPopularArticle from '../components/CardMostPopularArticle';
 import CardEventOfTheDay from '../components/CardEventOfTheDay';
 import Divider from '@mui/material/Divider';
@@ -36,6 +35,7 @@ const HomeScreen = () => {
     useEffect(() => {
         getData();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     
