@@ -40,7 +40,7 @@ body{
 .imageCarousel{
   height: 250px;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
   width: 100%;
 }
 
