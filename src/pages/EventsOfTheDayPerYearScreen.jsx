@@ -18,7 +18,7 @@ const EventsOfTheDayPerYearScreen = () => {
 
     const [articles, setArticles] = useState([])
 
-    const {eventOfTheDayPerYear} = useSelector(state => state.ui)
+    const {eventOfTheDayPerYear} = useSelector(state => state.getData)
     const dispatch = useDispatch()
     
     const {year} = useParams();
@@ -64,6 +64,7 @@ const EventsOfTheDayPerYearScreen = () => {
     return (
         <Container
             sx={{
+                paddingBottom: "30px",
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
                 marginTop: '0px',
                 /* border:'1px solid red', */

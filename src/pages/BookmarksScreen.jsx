@@ -1,4 +1,4 @@
-import { Box, Card, Container, Stack, Typography } from '@mui/material';
+import { Box, Card, Container, Skeleton, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -41,6 +41,7 @@ const BookmarksScreen = () => {
     return (
         <Container
             sx={{
+                paddingBottom: "30px",
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
                 marginTop: '0px',
                 /* border:'1px solid red', */
@@ -126,7 +127,14 @@ const BookmarksScreen = () => {
                                     ))
                                 }
                             </Slider>
-                        : <h1>Cargando</h1>
+                        : 
+                        <Skeleton  
+                            variant="rectangular" 
+                            sx={{
+                                width: '100%',
+                                height: '250px'
+                            }} 
+                        />
                     }
                 
 
@@ -169,19 +177,33 @@ const BookmarksScreen = () => {
                                 
                             ))
                     :
-                        <h1>notData</h1>
+                        <Skeleton  
+                            variant="rectangular" 
+                            sx={{
+                                width: '100%',
+                                height: '350px'
+                            }} 
+                        />
                 }
             </Stack>
 
-            <Pagination
-          
-                defaultCurrent={0}
-                onChange={UpdatePage}
-                current={pageNumber}
-                total={bookmarks?.length}
-                pageSize={itemsPerPage}
-                style={{margin: "25px 0px"}}
-            />
+            <Box
+                width={"100%"}
+                display={"flex"}
+                justifyContent={"center"}
+            >
+
+                <Pagination
+            
+                    defaultCurrent={0}
+                    onChange={UpdatePage}
+                    current={pageNumber}
+                    total={bookmarks?.length}
+                    pageSize={itemsPerPage}
+                    style={{margin: "25px 0px"}}
+                />
+
+            </Box>
         </Container>
     )
 }

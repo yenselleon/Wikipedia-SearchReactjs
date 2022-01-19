@@ -4,6 +4,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import NotFoundPageScreen from '../pages/404Screen';
 import BookmarksScreen from '../pages/BookmarksScreen';
@@ -26,6 +27,7 @@ const AppRouter = () => {
                 <Route path="/search/:searchInput" element={<SearchScreen />} />
                 <Route path="*" element={<NotFoundPageScreen />} />
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 }

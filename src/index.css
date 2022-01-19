@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-bottom: 125.52px;
+}
+
+html{
+  min-height: 100%;
+  position: relative;
 }
 
 code {

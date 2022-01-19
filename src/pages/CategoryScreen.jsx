@@ -17,7 +17,7 @@ import Slider from "react-slick";
 const CategoryScreen = () => {
 
 
-    const {categorys} = useSelector(state => state.ui);
+    const {categorys} = useSelector(state => state.getData);
     const {category:categoryParam} = useParams();
     const dispatch = useDispatch();;
 
@@ -47,6 +47,7 @@ const CategoryScreen = () => {
     return (
         <Container
             sx={{
+                paddingBottom: "30px",
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
                 marginTop: '0px',
                 /* border:'1px solid red', */

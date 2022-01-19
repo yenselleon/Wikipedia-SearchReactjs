@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
     const dispatch = useDispatch();
 
-    const {mostPopularArticlesMonth, eventOfTheDayPerYear} = useSelector(state => state.ui)
+    const {mostPopularArticlesMonth, eventOfTheDayPerYear} = useSelector(state => state.getData)
     const {lastview} = useSelector(state => state.localStoragedata)
 
     const getData =()=> {
@@ -42,6 +42,7 @@ const HomeScreen = () => {
     return (
         <Container
             sx={{
+                paddingBottom: "30px",
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
                 marginTop: '10px',
                 

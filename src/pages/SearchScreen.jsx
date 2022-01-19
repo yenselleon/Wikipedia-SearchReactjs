@@ -18,7 +18,7 @@ import SearchInput from '../components/SearchInput';
 const SearchScreen = () => {
 
 
-    const {searchedResults} = useSelector(state => state.ui);
+    const {searchedResults} = useSelector(state => state.getData);
     const {searchInput} = useParams();
     const dispatch = useDispatch();
 
@@ -56,6 +56,7 @@ const SearchScreen = () => {
     return (
         <Container
             sx={{
+                paddingBottom: "30px",
                 maxWidth: {xs: 'xs', md: 'md', lg: 'lg'}, 
                 marginTop: '0px',
                 /* border:'1px solid red', */

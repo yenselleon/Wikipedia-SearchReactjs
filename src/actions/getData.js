@@ -3,8 +3,10 @@ import types from '../types/types'
 import getFullDate from '../helpers/getDayAndMoth'
 
 const {year, month, day} = getFullDate();
+const currentYear = (month - 1) === 0 ? year - 1 : year;
+const currentMonth = ( month - 1 ) === 0 ? 12 : month 
 
-const urlArticleOfTheMonth = `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/${year}/${month - 1}/all-days`
+const urlArticleOfTheMonth = `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/${currentYear}/${currentMonth}/all-days`
 const urlWikipediaApi = `https://en.wikipedia.org/w/api.php?`;
 const urlEventOfTheDay = `https://byabbe.se/on-this-day/${month}/${day}/events.json`;
 
@@ -49,30 +51,42 @@ const startGetDataMostPopularArticleOfMonth = ()=> {
     return async(dispatch)=> {
 
         const dataArticles = await axios.get(urlArticleOfTheMonth).then(v=> v).then(d => d.data.items[0].articles);
-        const dataArticlesSlice = dataArticles.slice(3,23).map( d => d.article)
-       
+        const dataArticlesSlice = dataArticles.slice(3,20).map( d => d.article)
+
+        /* debugger */
+
         const promiseImageAndTitleArr = dataArticlesSlice.map( async(title) => {
             params.gsrsearch = title;
-            const formatTitle = title.replace(/_/g, " ");
+            const formatTitle = title.replace(/_/g, " ").split('(')[0].trim();
 
             const data = await axios.get(urlWikipediaApi, { params });
             const resultList = data.data.query.pages;
             const imageFound = Object.values(resultList)
                                     .find(data => data.hasOwnProperty('thumbnail') && data.title === formatTitle)?.thumbnail.source;
-            const titleAndId = Object.values(resultList).find(data => data.title === formatTitle);
+            const titleAndId = Object.values(resultList).find(data => data.title.includes(formatTitle));
+            /* debugger */
 
+            if(!titleAndId){
+
+                return {}
+            }
+            
             const nestedData = {
                 imageSource: imageFound,
                 title: titleAndId.title,
                 pageId: titleAndId.pageid,
                 description: titleAndId.extract,
             }
+
             return nestedData
+
         })
-        
+        /* debugger */
         const dataImageAndTitle = await Promise.all(promiseImageAndTitleArr);
 
-        dispatch(getDataMostPopularArticleOfMonth(dataImageAndTitle))
+        const filterEmptyData = dataImageAndTitle.filter( data => data.pageId !== undefined )
+
+        dispatch(getDataMostPopularArticleOfMonth(filterEmptyData))
 
         /* console.log(dataImageAndTitle); */
 

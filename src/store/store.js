@@ -15,7 +15,7 @@ let config = {
     key: 'lastViewAndBookmarks'
 }
 
-export const store = createStore(
+const store = createStore(
     reducers,
     composeEnhancers(
         applyMiddleware(thunk),
@@ -23,3 +23,4 @@ export const store = createStore(
     )
 );
 
+export default store;
